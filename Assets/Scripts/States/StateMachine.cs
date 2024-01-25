@@ -9,6 +9,7 @@ public class StateMachine
 
     IState _currentState;
     IState _previousState;
+
     public IState CurrentState => _currentState;
     public IState PreviousState => _previousState;
 

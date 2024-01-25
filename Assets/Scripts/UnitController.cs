@@ -58,10 +58,10 @@ public class UnitController : MonoBehaviour
         IdleState idleState = new IdleState(this);
         WalkState walkState = new WalkState(this);
         SitState sitState = new SitState(this);
-
+        bool isSeat = Target.CompareTag("Sit");
         _stateMachine.AddState(idleState, walkState, () => Target != null);
-        _stateMachine.AddState(walkState, sitState, () =>  canPlayAnimation && Target != null && Target.CompareTag("Sit"));
-        _stateMachine.AddState(sitState, walkState, () => Target != null && !Target.CompareTag("Sit"));
+        _stateMachine.AddState(walkState, sitState, () =>  canPlayAnimation && Target != null && isSeat);
+        _stateMachine.AddState(sitState, walkState, () => Target != null && !isSeat);
 
         _stateMachine.SetState(idleState);
     }
