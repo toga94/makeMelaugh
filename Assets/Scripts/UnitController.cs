@@ -9,10 +9,18 @@ public class UnitController : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     [SerializeField] private float walkRadius = 1f;
     [SerializeField] private Animator animator;
+
+    [SerializeField] private List<Vector3> patrolPoints;
+    private float stayDuration = 0f;
+    private float stayTimer = 0f;
+    private int currentPatrolIndex = 0;
+
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         unit = new Unit(RegStatus.Idle, 300, 400, 100);
+        SetNextPatrolPoint();
+
     }
 
 
@@ -27,8 +35,26 @@ public class UnitController : MonoBehaviour
 
         if (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)
         {
-            navMeshAgent.SetDestination(RandomNavmeshLocation(walkRadius));
+            //navMeshAgent.SetDestination(RandomNavmeshLocation(walkRadius));
+
+            if (stayTimer < stayDuration)
+            {
+                stayTimer += Time.deltaTime;
+            }
+            else
+            {
+                SetNextPatrolPoint();
+            }
         }
+    }
+
+    private void SetNextPatrolPoint()
+    {
+        if (patrolPoints.Count == 0) return;
+        navMeshAgent.SetDestination(patrolPoints[currentPatrolIndex]);
+        currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Count;
+        stayDuration = Random.Range(1f, 5f); 
+        stayTimer = 0f;
     }
     public Vector3 RandomNavmeshLocation(float radius)
     {
