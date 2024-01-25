@@ -6,11 +6,11 @@ using UnityEngine.AI;
 public class UnitController : MonoBehaviour
 {
     [SerializeField] private Unit unit;
-    private NavMeshAgent navMeshAgent;
+    public NavMeshAgent navMeshAgent;
     [SerializeField] private float walkRadius = 1f;
-    [SerializeField] private Animator animator;
+    [SerializeField] public Animator animator;
 
-    [SerializeField] private List<Transform> patrolPoints;
+    [SerializeField] public List<Transform> patrolPoints;
     Transform Target;
     private float stayDuration = 0f;
     private float stayTimer = 0f;
@@ -18,6 +18,7 @@ public class UnitController : MonoBehaviour
 
     private StateMachine _stateMachine;
     private bool canPlayAnimation;
+    private float curSpeed;
     void Start()
     {
         _stateMachine = new StateMachine();
@@ -25,6 +26,9 @@ public class UnitController : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         unit = new Unit(RegStatus.Idle, 300, 400, 100);
         InitializeStateMachine();
+
+        curSpeed = Mathf.Min(navMeshAgent.velocity.magnitude, 1);
+        animator.SetFloat("Speed", curSpeed);
 
     }
     void Update()
@@ -36,10 +40,6 @@ public class UnitController : MonoBehaviour
         {
             canPlayAnimation = Vector3.Distance(Target.position, transform.position) <= navMeshAgent.stoppingDistance;
         }
-
-        float curSpeed = Mathf.Min(navMeshAgent.velocity.magnitude, 1);
-        animator.SetFloat("Speed", curSpeed);
-
         if (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)
         {
             //navMeshAgent.SetDestination(RandomNavmeshLocation(walkRadius));
@@ -68,11 +68,12 @@ public class UnitController : MonoBehaviour
     private void InitializeStateMachine()
     {
         IdleState idleState = new IdleState(this);
-        SitState sitState = new SitState(this);
         WalkState walkState = new WalkState(this);
+        SitState sitState = new SitState(this);
 
         _stateMachine.AddState(idleState, walkState, () => Target != null);
-        _stateMachine.AddState(walkState, sitState, () => canPlayAnimation && Target.tag == "Sit");
+        _stateMachine.AddState(walkState, sitState, () =>  canPlayAnimation && Target != null && Target.CompareTag("Sit"));
+        _stateMachine.AddState(sitState, walkState, () => Target != null && !Target.CompareTag("Sit"));
 
         _stateMachine.SetState(idleState);
     }
@@ -83,7 +84,6 @@ public class UnitController : MonoBehaviour
         Target = null;
         currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Count;
         Target = patrolPoints[currentPatrolIndex].transform;
-        navMeshAgent.SetDestination(patrolPoints[currentPatrolIndex].transform.position);
         stayDuration = Random.Range(1f, 5f); 
         stayTimer = 0f;
     }
