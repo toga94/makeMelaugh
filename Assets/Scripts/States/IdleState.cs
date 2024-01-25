@@ -27,10 +27,12 @@ public class IdleState : IState
 
     public void OnEnter()
     {
+        _unitController.SetNextPatrolPoint();
     }
 
     public void OnExit()
     {
+        _unitController.animator.SetFloat("Speed", curSpeed);
     }
 
 

@@ -15,6 +15,7 @@ public class SitState : IState
 
     public void Tick()
     {
+        curSpeed = Mathf.Min(_unitController.navMeshAgent.velocity.magnitude, 1);
 
     }
     public void FixedTick()
@@ -23,14 +24,17 @@ public class SitState : IState
 
     public void LateTick()
     {
+        _unitController.animator.Play("Sit");
     }
 
     public void OnEnter()
     {
+        _unitController.animator.SetFloat("Speed", curSpeed);
     }
 
     public void OnExit()
     {
+        _unitController.animator.SetFloat("Speed", curSpeed);
     }
 
 

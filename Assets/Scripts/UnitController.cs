@@ -11,9 +11,9 @@ public class UnitController : MonoBehaviour
     [SerializeField] public Animator animator;
 
     [SerializeField] public List<Transform> patrolPoints;
-    Transform Target;
-    private float stayDuration = 0f;
-    private float stayTimer = 0f;
+    public Transform Target { get; private set; }
+    public float stayDuration = 0f;
+    public float stayTimer = 0f;
     private int currentPatrolIndex = 0;
 
     private StateMachine _stateMachine;
@@ -40,19 +40,7 @@ public class UnitController : MonoBehaviour
         {
             canPlayAnimation = Vector3.Distance(Target.position, transform.position) <= navMeshAgent.stoppingDistance;
         }
-        if (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)
-        {
-            //navMeshAgent.SetDestination(RandomNavmeshLocation(walkRadius));
-
-            if (stayTimer < stayDuration)
-            {
-                stayTimer += Time.deltaTime;
-            }
-            else
-            {
-                SetNextPatrolPoint();
-            }
-        }
+        
     }
 
     private void FixedUpdate()
@@ -77,13 +65,14 @@ public class UnitController : MonoBehaviour
 
         _stateMachine.SetState(idleState);
     }
-    private void SetNextPatrolPoint()
+    public void SetNextPatrolPoint()
     {
         if (patrolPoints.Count == 0) return;
 
         Target = null;
         currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Count;
         Target = patrolPoints[currentPatrolIndex].transform;
+        navMeshAgent.SetDestination(patrolPoints[currentPatrolIndex].transform.position);
         stayDuration = Random.Range(1f, 5f); 
         stayTimer = 0f;
     }
