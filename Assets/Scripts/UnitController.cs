@@ -10,25 +10,32 @@ public class UnitController : MonoBehaviour
     [SerializeField] private float walkRadius = 1f;
     [SerializeField] private Animator animator;
 
-    [SerializeField] private List<Vector3> patrolPoints;
+    [SerializeField] private List<Transform> patrolPoints;
+    Transform Target;
     private float stayDuration = 0f;
     private float stayTimer = 0f;
     private int currentPatrolIndex = 0;
 
+    private StateMachine _stateMachine;
+    private bool canPlayAnimation;
     void Start()
     {
+        _stateMachine = new StateMachine();
+
         navMeshAgent = GetComponent<NavMeshAgent>();
         unit = new Unit(RegStatus.Idle, 300, 400, 100);
-        SetNextPatrolPoint();
+        InitializeStateMachine();
 
     }
-
-
-
     void Update()
     {
         unit.MiusStatus(Time.deltaTime);
 
+        _stateMachine.Tick();
+        if (Target != null)
+        {
+            canPlayAnimation = Vector3.Distance(Target.position, transform.position) <= navMeshAgent.stoppingDistance;
+        }
 
         float curSpeed = Mathf.Min(navMeshAgent.velocity.magnitude, 1);
         animator.SetFloat("Speed", curSpeed);
@@ -48,11 +55,35 @@ public class UnitController : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        _stateMachine.FixedTick();
+    }
+
+    private void LateUpdate()
+    {
+        _stateMachine.LateTick();
+    }
+
+    private void InitializeStateMachine()
+    {
+        IdleState idleState = new IdleState(this);
+        SitState sitState = new SitState(this);
+        WalkState walkState = new WalkState(this);
+
+        _stateMachine.AddState(idleState, walkState, () => Target != null);
+        _stateMachine.AddState(walkState, sitState, () => canPlayAnimation && Target.tag == "Sit");
+
+        _stateMachine.SetState(idleState);
+    }
     private void SetNextPatrolPoint()
     {
         if (patrolPoints.Count == 0) return;
-        navMeshAgent.SetDestination(patrolPoints[currentPatrolIndex]);
+
+        Target = null;
         currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Count;
+        Target = patrolPoints[currentPatrolIndex].transform;
+        navMeshAgent.SetDestination(patrolPoints[currentPatrolIndex].transform.position);
         stayDuration = Random.Range(1f, 5f); 
         stayTimer = 0f;
     }
