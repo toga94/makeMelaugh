@@ -376,6 +376,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.6209
       objectReference: {fileID: 0}
+    - target: {fileID: 3053260749859896789, guid: bd5fc70b56454fa4f98ccd2d7f268aa6,
+        type: 3}
+      propertyPath: m_Name
+      value: sit_couch_pillows
+      objectReference: {fileID: 0}
     - target: {fileID: 3076505512096704401, guid: bd5fc70b56454fa4f98ccd2d7f268aa6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -611,6 +616,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.063783
       objectReference: {fileID: 0}
+    - target: {fileID: 5922328675867544870, guid: bd5fc70b56454fa4f98ccd2d7f268aa6,
+        type: 3}
+      propertyPath: m_Name
+      value: sit_chair_C (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 5934619501748542906, guid: bd5fc70b56454fa4f98ccd2d7f268aa6,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -775,6 +785,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -4.026
+      objectReference: {fileID: 0}
+    - target: {fileID: 7619653022880785585, guid: bd5fc70b56454fa4f98ccd2d7f268aa6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.988
+      objectReference: {fileID: 0}
+    - target: {fileID: 7619653022880785585, guid: bd5fc70b56454fa4f98ccd2d7f268aa6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.73
       objectReference: {fileID: 0}
     - target: {fileID: 7927539193984042922, guid: bd5fc70b56454fa4f98ccd2d7f268aa6,
         type: 3}
@@ -1337,6 +1357,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1423082835}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &395587817 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6447894768113522588, guid: bd5fc70b56454fa4f98ccd2d7f268aa6,
+    type: 3}
+  m_PrefabInstance: {fileID: 28629989}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &409046479
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1688,6 +1714,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00da202548221ff4eb4bb265bdf8ac1a, type: 3}
+--- !u!4 &457494020 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7619653022880785585, guid: bd5fc70b56454fa4f98ccd2d7f268aa6,
+    type: 3}
+  m_PrefabInstance: {fileID: 28629989}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &553799553
 GameObject:
   m_ObjectHideFlags: 3
@@ -1856,6 +1888,12 @@ MonoBehaviour:
   m_IgnoreFromBuild: 0
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
+--- !u!4 &656961173 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8665536252217167605, guid: bd5fc70b56454fa4f98ccd2d7f268aa6,
+    type: 3}
+  m_PrefabInstance: {fileID: 28629989}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &658540524
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3462,6 +3500,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00da202548221ff4eb4bb265bdf8ac1a, type: 3}
+--- !u!4 &1429972799 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3136788450314777758, guid: bd5fc70b56454fa4f98ccd2d7f268aa6,
+    type: 3}
+  m_PrefabInstance: {fileID: 28629989}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1432460280 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 00da202548221ff4eb4bb265bdf8ac1a,
@@ -3536,6 +3580,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fde752bda5f0154695abaf07897bb5f, type: 3}
+--- !u!4 &1444347132 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8075440434164994082, guid: bd5fc70b56454fa4f98ccd2d7f268aa6,
+    type: 3}
+  m_PrefabInstance: {fileID: 28629989}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1576121547
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3935,6 +3985,12 @@ MonoBehaviour:
   m_IgnoreFromBuild: 0
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
+--- !u!4 &2071310997 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8869502349800519837, guid: bd5fc70b56454fa4f98ccd2d7f268aa6,
+    type: 3}
+  m_PrefabInstance: {fileID: 28629989}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2084226434
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4065,6 +4121,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1141166084939941415, guid: 0cfa6b6fb358426498879b20e6333278,
+        type: 3}
+      propertyPath: m_StoppingDistance
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 1250224153837206494, guid: 0cfa6b6fb358426498879b20e6333278,
         type: 3}
       propertyPath: m_Name
@@ -4078,7 +4139,7 @@ PrefabInstance:
     - target: {fileID: 4933127991161314341, guid: 0cfa6b6fb358426498879b20e6333278,
         type: 3}
       propertyPath: patrolPoints.Array.size
-      value: 3
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4933127991161314341, guid: 0cfa6b6fb358426498879b20e6333278,
         type: 3}
@@ -4095,6 +4156,36 @@ PrefabInstance:
       propertyPath: patrolPoints.Array.data[2]
       value: 
       objectReference: {fileID: 2085001546}
+    - target: {fileID: 4933127991161314341, guid: 0cfa6b6fb358426498879b20e6333278,
+        type: 3}
+      propertyPath: patrolPoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 395587817}
+    - target: {fileID: 4933127991161314341, guid: 0cfa6b6fb358426498879b20e6333278,
+        type: 3}
+      propertyPath: patrolPoints.Array.data[4]
+      value: 
+      objectReference: {fileID: 656961173}
+    - target: {fileID: 4933127991161314341, guid: 0cfa6b6fb358426498879b20e6333278,
+        type: 3}
+      propertyPath: patrolPoints.Array.data[5]
+      value: 
+      objectReference: {fileID: 1444347132}
+    - target: {fileID: 4933127991161314341, guid: 0cfa6b6fb358426498879b20e6333278,
+        type: 3}
+      propertyPath: patrolPoints.Array.data[6]
+      value: 
+      objectReference: {fileID: 1429972799}
+    - target: {fileID: 4933127991161314341, guid: 0cfa6b6fb358426498879b20e6333278,
+        type: 3}
+      propertyPath: patrolPoints.Array.data[7]
+      value: 
+      objectReference: {fileID: 457494020}
+    - target: {fileID: 4933127991161314341, guid: 0cfa6b6fb358426498879b20e6333278,
+        type: 3}
+      propertyPath: patrolPoints.Array.data[8]
+      value: 
+      objectReference: {fileID: 2071310997}
     - target: {fileID: 6171299127224700798, guid: 0cfa6b6fb358426498879b20e6333278,
         type: 3}
       propertyPath: m_LocalPosition.x
