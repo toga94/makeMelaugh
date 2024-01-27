@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SitState : IState
+public class WashState : IState
 {
-
     UnitController _unitController;
     float curSpeed;
 
-    public SitState(UnitController unitController)
+    public WashState(UnitController unitController)
     {
         _unitController = unitController;
     }
@@ -25,18 +24,18 @@ public class SitState : IState
 
     public void LateTick()
     {
-        
+
     }
 
     public void OnEnter()
     {
         _unitController.animator.SetFloat("Speed", curSpeed);
-        _unitController.animator.SetBool("IsSitting", true);
+        _unitController.animator.SetBool("IsWashing", true);
     }
 
     public void OnExit()
     {
-        _unitController.animator.SetBool("IsSitting", false);
+        _unitController.animator.SetBool("IsWashing", false);
         _unitController.animator.SetFloat("Speed", curSpeed);
     }
 

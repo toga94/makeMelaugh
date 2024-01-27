@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2669637276597823969}
   m_Layer: 0
   m_Name: Banana
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 3269329143339297067}
   m_Layer: 0
   m_Name: Banana Peel
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

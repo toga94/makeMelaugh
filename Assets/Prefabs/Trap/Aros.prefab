@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4495472049114163643}
   m_Layer: 0
   m_Name: Aros
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 5084582372775138427}
   m_Layer: 0
   m_Name: Aros
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

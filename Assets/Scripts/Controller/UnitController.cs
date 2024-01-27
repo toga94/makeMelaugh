@@ -51,6 +51,9 @@ public class UnitController : MonoBehaviour
         if (Target != null)
         {
             _canPlayAnimation = Vector3.Distance(Target.Transform.position, transform.position) < 1.5f && Vector3.Distance(Target.Transform.position, transform.position) >= navMeshAgent.stoppingDistance;
+
+            if (_canPlayAnimation) navMeshAgent.speed = 0;
+
         }
         
     }
@@ -70,19 +73,29 @@ public class UnitController : MonoBehaviour
         IdleState idleState = new IdleState(this);
         WalkState walkState = new WalkState(this);
         SitState sitState = new SitState(this);
+        WashState washState = new WashState(this);
 
         SetNextPatrolPoint();
 
 
         _stateMachine.AddState(idleState, walkState, () => Target != null );
         _stateMachine.AddState(walkState, sitState, () =>  _canPlayAnimation && Target != null && Target.Transform.name.Contains("sit"));
+        _stateMachine.AddState(walkState, washState, () =>  _canPlayAnimation && Target != null && Target.Transform.name.Contains("wash"));
         _stateMachine.AddState(sitState, walkState, () => Target != null && !Target.Transform.name.Contains("sit"));
+        _stateMachine.AddState(washState, walkState, () => Target != null && !Target.Transform.name.Contains("wash"));
         _stateMachine.AddState(walkState, idleState, () => Target != null &&  _canPlayAnimation);
 
         _stateMachine.SetState(idleState);
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Trap"))
+        {
+            animator.Play("Trap");
+            Destroy(other.gameObject);
+        }
+    }
 
-    
     public void SetNextPatrolPoint()
     {
 
@@ -93,6 +106,7 @@ public class UnitController : MonoBehaviour
         }
 
         Target = PathManager.Instance.RequestPath();
+        navMeshAgent.speed = 1;
         navMeshAgent.SetDestination(Target.Transform.position);
         stayDuration = Random.Range(1f, 5f);
         stayTimer = 0f;
