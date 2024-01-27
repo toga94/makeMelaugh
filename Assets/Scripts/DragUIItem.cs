@@ -17,10 +17,11 @@ public class DragUIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     private Vector2 mOriginalLocalPointerPosition;
     private Vector3 mOriginalPanelLocalPosition;
     private Vector2 mOriginalPosition;
-    
+    private Camera _camera;
     void Start()
     {
         mOriginalPosition = UIDragElement.localPosition;
+        _camera = Camera.main;
     }
 
     public void OnDrag(PointerEventData data)
@@ -60,7 +61,7 @@ public class DragUIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
                 0.5f));
 
         RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(
+        Ray ray = _camera.ScreenPointToRay(
             Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit, 1000.0f))
@@ -94,6 +95,7 @@ public class DragUIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     
     public void CreateObject(Vector3 position)
     {
+        Vector3 offset = new Vector3(0, 0.161f, 0);
         if (PrefabToInstantiate == null)
         {
             Debug.Log("No prefab to instantiate");
@@ -101,7 +103,7 @@ public class DragUIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
         }
         GameObject obj = Instantiate(
             PrefabToInstantiate, 
-            position, 
+            position+offset, 
             Quaternion.identity);
     }
 }
