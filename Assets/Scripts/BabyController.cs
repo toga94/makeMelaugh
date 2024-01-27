@@ -13,7 +13,7 @@ public class BabyController : MonoBehaviour
     private Color[] _colors;
     private void Start()
     {
-        _emosionalIndicator.value = 0.5f;
+        _emosionalIndicator.value = 0;
         _colors = new Color[3]
         {
             new Color32(15, 137, 0, 179),
@@ -28,21 +28,21 @@ public class BabyController : MonoBehaviour
         _emosion = _emosionalIndicator.value;
         BabyState(_emosion);
     }
-
+    
     private void BabyState(float emosion)
     {
-        if (emosion <= 0.378)
+        if (emosion <= -0.24)
         {
             _animator.SetTrigger("isLaugh");
             _babyBackground.color = _colors[0];
 
         }
-        if (emosion > 0.378 && emosion <= 0.633)
+        if (emosion > -0.24 && emosion <= 0.27)
         {
             _animator.SetTrigger("isIdle");
             _babyBackground.color = _colors[1];
         }
-        if(emosion > 0.633) {
+        if(emosion > 0.27) {
             _animator.SetTrigger("isCry");
             _babyBackground.color = _colors[2];
         }
