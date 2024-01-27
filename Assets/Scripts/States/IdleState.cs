@@ -21,18 +21,22 @@ public class IdleState : IState
 
     public void LateTick()
     {
-        _unitController.animator.SetFloat("Speed", curSpeed);
 
     }
 
     public void OnEnter()
     {
-        _unitController.SetNextPatrolPoint();
+        _unitController.animator.SetFloat("Speed", curSpeed);
+
+
     }
 
     public void OnExit()
     {
+        Debug.Log("HERE Idle");
+        //_unitController.SetNextPatrolPoint();
         _unitController.animator.SetFloat("Speed", curSpeed);
+
     }
 
 

@@ -24,16 +24,19 @@ public class SitState : IState
 
     public void LateTick()
     {
-        _unitController.animator.Play("Sit");
+        
     }
 
     public void OnEnter()
     {
         _unitController.animator.SetFloat("Speed", curSpeed);
+        _unitController.animator.SetBool("IsSitting", true);
     }
 
     public void OnExit()
     {
+        //_unitController.SetNextPatrolPoint();
+        _unitController.animator.SetBool("IsSitting", false);
         _unitController.animator.SetFloat("Speed", curSpeed);
     }
 

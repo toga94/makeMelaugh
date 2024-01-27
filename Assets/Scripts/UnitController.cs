@@ -6,29 +6,28 @@ using UnityEngine.AI;
 public class UnitController : MonoBehaviour
 {
     [SerializeField] private Unit unit;
-    public NavMeshAgent navMeshAgent;
     [SerializeField] private float walkRadius = 1f;
     [SerializeField] public Animator animator;
 
-    [SerializeField] public List<Transform> patrolPoints;
+    [SerializeField] private List<Transform> patrolPoints;
+    public NavMeshAgent navMeshAgent { get; private set; }
     public Transform Target { get; private set; }
-    public float stayDuration = 0f;
-    public float stayTimer = 0f;
+    private float stayDuration = 0f;
+    private float stayTimer = 0f;
     private int currentPatrolIndex = 0;
 
     private StateMachine _stateMachine;
-    private bool canPlayAnimation;
-    private float curSpeed;
+    private bool _canPlayAnimation;
+    private float _curSpeed;
     void Start()
     {
         _stateMachine = new StateMachine();
-
         navMeshAgent = GetComponent<NavMeshAgent>();
         unit = new Unit(RegStatus.Idle, 300, 400, 100);
         InitializeStateMachine();
 
-        curSpeed = Mathf.Min(navMeshAgent.velocity.magnitude, 1);
-        animator.SetFloat("Speed", curSpeed);
+        _curSpeed = Mathf.Min(navMeshAgent.velocity.magnitude, 1);
+        animator.SetFloat("Speed", _curSpeed);
 
     }
     void Update()
@@ -36,9 +35,24 @@ public class UnitController : MonoBehaviour
         unit.MiusStatus(Time.deltaTime);
 
         _stateMachine.Tick();
+
+        if (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)
+        {
+            //navMeshAgent.SetDestination(RandomNavmeshLocation(walkRadius));
+
+            if (stayTimer < stayDuration)
+            {
+                stayTimer += Time.deltaTime;
+            }
+            else
+            {
+                SetNextPatrolPoint();
+            }
+        }
+
         if (Target != null)
         {
-            canPlayAnimation = Vector3.Distance(Target.position, transform.position) <= navMeshAgent.stoppingDistance;
+            _canPlayAnimation = Vector3.Distance(Target.position, transform.position) < 1.5f && Vector3.Distance(Target.position, transform.position) >= navMeshAgent.stoppingDistance;
         }
         
     }
@@ -58,23 +72,25 @@ public class UnitController : MonoBehaviour
         IdleState idleState = new IdleState(this);
         WalkState walkState = new WalkState(this);
         SitState sitState = new SitState(this);
-        bool isSeat = Target.CompareTag("Sit");
-        _stateMachine.AddState(idleState, walkState, () => Target != null);
-        _stateMachine.AddState(walkState, sitState, () =>  canPlayAnimation && Target != null && isSeat);
-        _stateMachine.AddState(sitState, walkState, () => Target != null && !isSeat);
+
+        SetNextPatrolPoint();
+        //bool isSeat = Target.CompareTag("Sit");
+        _stateMachine.AddState(idleState, walkState, () => Target != null );
+        _stateMachine.AddState(walkState, sitState, () =>  _canPlayAnimation && Target != null && Target.name.Contains("sit"));
+        _stateMachine.AddState(sitState, walkState, () => Target != null && !Target.name.Contains("sit"));
+        _stateMachine.AddState(walkState, idleState, () => Target != null &&  _canPlayAnimation);
 
         _stateMachine.SetState(idleState);
     }
     public void SetNextPatrolPoint()
     {
-        if (patrolPoints.Count == 0) return;
-
         Target = null;
-        currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Count;
+        currentPatrolIndex = /*(currentPatrolIndex + 1) % patrolPoints.Count*/ Random.Range(0, patrolPoints.Count);
         Target = patrolPoints[currentPatrolIndex].transform;
         navMeshAgent.SetDestination(patrolPoints[currentPatrolIndex].transform.position);
         stayDuration = Random.Range(1f, 5f); 
         stayTimer = 0f;
+
     }
     public Vector3 RandomNavmeshLocation(float radius)
     {
