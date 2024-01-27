@@ -1,8 +1,30 @@
 using System;
 using UnityEngine;
+
 [Serializable]
-public struct PatrolPath 
+public class PatrolPath 
 {
-    public Vector3 startPath;
-    public Vector3 endPath;
+    public Transform Transform;
+    //public string Name;
+    private bool isOccupied = false;
+    public bool IsOccupied
+    {
+        get { return isOccupied; }
+        set
+        {
+            if (isOccupied != value)
+            {
+                isOccupied = value;
+                OnIsOccupiedChanged?.Invoke(this);
+            }
+        }
+    }
+    public event Action<PatrolPath> OnIsOccupiedChanged;
+
+    public PatrolPath(Transform transform, string name)
+    {
+        Transform = transform;
+        //Name = name;
+    }
+
 }
