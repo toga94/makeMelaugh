@@ -73,24 +73,26 @@ public class DragUIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
             Item item = UIDragElement.GetComponent<Item>();
             ItemType itemType = item.itemType;
             Tool tool = item.tool;
+            Debug.Log(hit.transform.name);
             if (hit.transform.gameObject.name.Contains("Floors") && itemType == ItemType.Trap)
             {
                 CreateObject(worldPoint);
             }else if (hit.transform.gameObject.GetComponent<NavMeshAgent>() && itemType == ItemType.UsableTool)
             {
-                switch (tool)
-                {
-                    case Tool.Signal:
-                        break;
-                    case Tool.Slap:
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
+                PlayTool(hit.transform, 3, tool);
             }
         }
     }
-    
+    private void PlayTool(Transform target, float deadline = 3, Tool tool = Tool.Signal) {
+        Vector3 offset = Vector3.up;
+        string name = Enum.GetName(typeof(Tool), tool);
+        Debug.Log(name);
+        GameObject go = (GameObject) Instantiate(PrefabToInstantiate, target.position + offset, Quaternion.identity, target);
+        Destroy(go, deadline);
+        target.GetComponent<UnitController>().animator.Play(name);
+    }
+
+
     public IEnumerator Coroutine_MoveUIElement(
         RectTransform r, 
         Vector2 targetPosition, 
