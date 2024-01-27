@@ -91,6 +91,7 @@ public class UnitController : MonoBehaviour
     {
         if (other.CompareTag("Trap"))
         {
+            Debug.Log("Deydi");
             animator.Play("Trap");
             Destroy(other.gameObject);
         }
