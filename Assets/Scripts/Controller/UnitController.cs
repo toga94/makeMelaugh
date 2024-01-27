@@ -9,12 +9,10 @@ public class UnitController : MonoBehaviour
     [SerializeField] private float walkRadius = 1f;
     [SerializeField] public Animator animator;
 
-    //[SerializeField] private List<Transform> patrolPoints;
     public NavMeshAgent navMeshAgent { get; private set; }
     public PatrolPath Target { get; private set; }
     private float stayDuration = 0f;
     private float stayTimer = 0f;
-    private int currentPatrolIndex = 0;
 
     private StateMachine _stateMachine;
     private bool _canPlayAnimation;
@@ -53,7 +51,6 @@ public class UnitController : MonoBehaviour
         if (Target != null)
         {
             _canPlayAnimation = Vector3.Distance(Target.Transform.position, transform.position) < 1.5f && Vector3.Distance(Target.Transform.position, transform.position) >= navMeshAgent.stoppingDistance;
-            if(_canPlayAnimation) PathManager.Instance.ReleasePath(Target);
         }
         
     }
@@ -74,7 +71,6 @@ public class UnitController : MonoBehaviour
         WalkState walkState = new WalkState(this);
         SitState sitState = new SitState(this);
 
-        //PathManager.Instance.ReleasePath(Target);
         SetNextPatrolPoint();
 
 
@@ -89,20 +85,12 @@ public class UnitController : MonoBehaviour
     
     public void SetNextPatrolPoint()
     {
-        //Target = null;
-        //(currentPatrolIndex + 1) % patrolPoints.Count
-        //currentPatrolIndex =  Random.Range(0, patrolPoints.Count);
-        //Target = patrolPoints[currentPatrolIndex].transform;
-        //navMeshAgent.SetDestination(patrolPoints[currentPatrolIndex].transform.position);
-        //stayDuration = Random.Range(1f, 5f); 
-        //stayTimer = 0f;
+
         if (Target != null)
         {
             PathManager.Instance.ReleasePath(Target);
             Target = null;
         }
-
-        if (PathManager.Instance.availablePatrolPaths.Count == 0) return;
 
         Target = PathManager.Instance.RequestPath();
         navMeshAgent.SetDestination(Target.Transform.position);

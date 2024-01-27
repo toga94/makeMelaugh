@@ -5,7 +5,6 @@ using UnityEngine;
 public class PatrolPath 
 {
     public Transform Transform;
-    //public string Name;
     private bool isOccupied = false;
     public bool IsOccupied
     {
@@ -21,10 +20,5 @@ public class PatrolPath
     }
     public event Action<PatrolPath> OnIsOccupiedChanged;
 
-    public PatrolPath(Transform transform, string name)
-    {
-        Transform = transform;
-        //Name = name;
-    }
 
 }

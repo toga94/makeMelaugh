@@ -35,7 +35,6 @@ public class SitState : IState
 
     public void OnExit()
     {
-        //_unitController.SetNextPatrolPoint();
         _unitController.animator.SetBool("IsSitting", false);
         _unitController.animator.SetFloat("Speed", curSpeed);
     }
