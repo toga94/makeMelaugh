@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 public class DragUIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
@@ -67,9 +70,24 @@ public class DragUIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
         if (Physics.Raycast(ray, out hit, 1000.0f))
         {
             Vector3 worldPoint = hit.point;
-
-            //Debug.Log(worldPoint);
-            CreateObject(worldPoint);
+            Item item = UIDragElement.GetComponent<Item>();
+            ItemType itemType = item.itemType;
+            Tool tool = item.tool;
+            if (hit.transform.gameObject.name.Contains("Floors") && itemType == ItemType.Trap)
+            {
+                CreateObject(worldPoint);
+            }else if (hit.transform.gameObject.GetComponent<NavMeshAgent>() && itemType == ItemType.UsableTool)
+            {
+                switch (tool)
+                {
+                    case Tool.Signal:
+                        break;
+                    case Tool.Slap:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
         }
     }
     
