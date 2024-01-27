@@ -57,11 +57,11 @@ public class DragUIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        StartCoroutine(
-            Coroutine_MoveUIElement(      
-                UIDragElement,       
-                mOriginalPosition,       
-                0.5f));
+        //StartCoroutine(
+        //    Coroutine_MoveUIElement(      
+        //        UIDragElement,       
+        //        mOriginalPosition,       
+        //        0.5f));
 
         RaycastHit hit;
         Ray ray = _camera.ScreenPointToRay(
@@ -71,6 +71,7 @@ public class DragUIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
         {
             Vector3 worldPoint = hit.point;
             Item item = UIDragElement.GetComponent<Item>();
+
             ItemType itemType = item.itemType;
             Tool tool = item.tool;
             Debug.Log(hit.transform.name);
@@ -81,6 +82,7 @@ public class DragUIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
             {
                 PlayTool(hit.transform, 3, tool);
             }
+            Destroy(UIDragElement.gameObject);
         }
     }
     private void PlayTool(Transform target, float deadline = 3, Tool tool = Tool.Signal) {

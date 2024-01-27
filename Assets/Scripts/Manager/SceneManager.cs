@@ -9,11 +9,14 @@ public class SceneManager : MonoBehaviour
     private Unit[] units;
     private IInteractable[] Interactables;
     public float Score;
+    [SerializeField] private ItemSlotsManager itemSlotsManager;
+    private Camera camera;
     [SerializeField] private Slider crySlider;
     [SerializeField] private float timer = 100;
     void Start()
     {
         Init();
+        camera = Camera.main;
     }
 
     private void Init()
@@ -44,7 +47,24 @@ public class SceneManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space)) {
             Laugh();
         }
+        Click2Item();
     }
+
+    void Click2Item() {
+        RaycastHit hit;
+        Ray ray = camera.ScreenPointToRay(
+            Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, float.PositiveInfinity))
+            {
+            ItemObject itemObject = hit.transform.gameObject.GetComponent<ItemObject>();
+                if (itemObject) {
+                    if(itemSlotsManager.Insert2Tile(itemObject.UIElement)) Destroy(hit.transform.gameObject);
+
+                }
+            }
+        }
+
 
     void GameWon() {
 
