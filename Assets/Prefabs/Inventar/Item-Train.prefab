@@ -93,6 +93,8 @@ MonoBehaviour:
     type: 3}
   UIDragElement: {fileID: 8825898714172087987}
   Canvas: {fileID: 0}
+  audioSource: {fileID: 639063926583055020, guid: 908c59df7a5558f46b199e14455a67a4,
+    type: 3}
 --- !u!114 &2048253689681847261
 MonoBehaviour:
   m_ObjectHideFlags: 0

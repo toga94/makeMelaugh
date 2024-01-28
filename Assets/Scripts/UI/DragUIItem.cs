@@ -21,6 +21,8 @@ public class DragUIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     private Vector3 mOriginalPanelLocalPosition;
     private Vector2 mOriginalPosition;
     private Camera _camera;
+
+    [SerializeField] AudioSource audioSource;
     void Start()
     {
         mOriginalPosition = UIDragElement.localPosition;
@@ -49,6 +51,8 @@ public class DragUIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     {
         mOriginalPanelLocalPosition = UIDragElement.localPosition;
         if (Canvas == null) Canvas = GameObject.Find("Canvas").GetComponent<RectTransform>();
+        //if (audioSource == null) audioSource = GameObject.Find("SlipAndFall").GetComponent<AudioSource>();
+
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             Canvas, 
             data.position, 
@@ -81,6 +85,9 @@ public class DragUIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
                 CreateObject(worldPoint);
             }else if (hit.transform.gameObject.GetComponent<NavMeshAgent>() && itemType == ItemType.UsableTool)
             {
+                if(item.tool == Tool.Slap) audioSource = GameObject.Find("Slap").GetComponent<AudioSource>();
+                if(item.tool == Tool.Signal) audioSource = GameObject.Find("Signal").GetComponent<AudioSource>();
+
                 PlayTool(hit.transform, .85f, tool);
             }
             Destroy(UIDragElement.gameObject);
@@ -94,6 +101,7 @@ public class DragUIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
         Destroy(go, deadline);
         UnitController controller = target.GetComponent<UnitController>();
         controller.animator.Play(name);
+        audioSource.Play();
         controller.sceneManager.Laugh(3);
 
     }
