@@ -107,3 +107,5 @@ MonoBehaviour:
     type: 3}
   UIDragElement: {fileID: 1867090596170997737}
   Canvas: {fileID: 0}
+  audioSource: {fileID: 724282681372316015, guid: 55b7f9b79c1f64843af71f365f69432b,
+    type: 3}

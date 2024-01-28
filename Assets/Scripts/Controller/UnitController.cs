@@ -20,6 +20,7 @@ public class UnitController : MonoBehaviour
     private float _curSpeed;
     private bool isTrapped;
 
+    public AudioSource trapSound;
     void Start()
     {
         _stateMachine = new StateMachine();
@@ -109,6 +110,8 @@ public class UnitController : MonoBehaviour
         if (other.CompareTag("Trap"))
         {
             isTrapped = true;
+            trapSound = GameObject.Find("SlipAndFall").GetComponent<AudioSource>();
+            trapSound.Play();
         }
         await Task.Delay(1300);
         isTrapped = false;
