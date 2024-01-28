@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,6 +18,8 @@ public class UnitController : MonoBehaviour
     private StateMachine _stateMachine;
     private bool _canPlayAnimation;
     private float _curSpeed;
+    private bool isTrapped;
+
     void Start()
     {
         _stateMachine = new StateMachine();
@@ -50,7 +53,7 @@ public class UnitController : MonoBehaviour
 
         if (Target != null)
         {
-            _canPlayAnimation = Vector3.Distance(Target.Transform.position, transform.position) < 1.5f && Vector3.Distance(Target.Transform.position, transform.position) >= navMeshAgent.stoppingDistance;
+            _canPlayAnimation = Vector3.Distance(Target.Transform.position, transform.position) < 0.5f && Vector3.Distance(Target.Transform.position, transform.position) >= navMeshAgent.stoppingDistance;
 
             if (_canPlayAnimation) navMeshAgent.speed = 0;
 
@@ -74,27 +77,42 @@ public class UnitController : MonoBehaviour
         WalkState walkState = new WalkState(this);
         SitState sitState = new SitState(this);
         WashState washState = new WashState(this);
+        CookState cookState = new CookState(this);
+        TrapState trapState = new TrapState(this);
 
         SetNextPatrolPoint();
 
 
         _stateMachine.AddState(idleState, walkState, () => Target != null );
+        _stateMachine.AddState(idleState, trapState, () => isTrapped);
+
         _stateMachine.AddState(walkState, sitState, () =>  _canPlayAnimation && Target != null && Target.Transform.name.Contains("sit"));
         _stateMachine.AddState(walkState, washState, () =>  _canPlayAnimation && Target != null && Target.Transform.name.Contains("wash"));
-        _stateMachine.AddState(sitState, walkState, () => Target != null && !Target.Transform.name.Contains("sit"));
-        _stateMachine.AddState(washState, walkState, () => Target != null && !Target.Transform.name.Contains("wash"));
+        _stateMachine.AddState(walkState, cookState, () =>  _canPlayAnimation && Target != null && Target.Transform.name.Contains("cook"));
+        _stateMachine.AddState(walkState, trapState, () => isTrapped);
         _stateMachine.AddState(walkState, idleState, () => Target != null &&  _canPlayAnimation);
+
+        _stateMachine.AddState(sitState, walkState, () => Target != null && !Target.Transform.name.Contains("sit"));
+
+        _stateMachine.AddState(washState, walkState, () => Target != null && !Target.Transform.name.Contains("wash"));
+
+        _stateMachine.AddState(cookState, walkState, () => Target != null && !Target.Transform.name.Contains("cook"));
+
+        _stateMachine.AddState(trapState, walkState, () => !isTrapped);
+        _stateMachine.AddState(trapState, idleState, () => !isTrapped);
+
 
         _stateMachine.SetState(idleState);
     }
-    private void OnTriggerEnter(Collider other)
+    private async void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Trap"))
         {
-            Debug.Log("Deydi");
-            animator.Play("Trap");
-            Destroy(other.gameObject);
+            isTrapped = true;
         }
+        await Task.Delay(1000);
+        isTrapped = false;
+        Destroy(other.gameObject);
     }
 
     public void SetNextPatrolPoint()

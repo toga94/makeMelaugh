@@ -554,6 +554,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8062673774808957521}
   - component: {fileID: 3181703171911567788}
+  - component: {fileID: 670143288668947628}
   m_Layer: 0
   m_Name: Toys
   m_TagString: Trap
@@ -604,6 +605,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.1321514, y: 0.6228701, z: 2.0607362}
   m_Center: {x: 0.19886911, y: 0.23184222, z: 0.006123781}
+--- !u!54 &670143288668947628
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4374983078400619630}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5296981156594714210
 GameObject:
   m_ObjectHideFlags: 0
