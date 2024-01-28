@@ -330,7 +330,6 @@ GameObject:
   m_Component:
   - component: {fileID: 182861457}
   - component: {fileID: 182861456}
-  - component: {fileID: 182861458}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -354,6 +353,7 @@ MonoBehaviour:
   itemSlotsManager: {fileID: 1589351595}
   crySlider: {fileID: 223385051}
   timer: 100
+  SmokeFX: {fileID: 5230574575069212733, guid: f8317fd61e61ceb448ca21aa1c5719ab, type: 3}
 --- !u!4 &182861457
 Transform:
   m_ObjectHideFlags: 0
@@ -369,26 +369,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &182861458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 182861455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4894aec049d2bc478e6200ef1af1430, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targets:
-  - {fileID: 218779657523934640}
-  - {fileID: 1115574580}
-  - {fileID: 111048399}
-  - {fileID: 90086392}
-  points: []
-  objectPool: {fileID: 220042361}
-  cam: {fileID: 961739752}
 --- !u!1 &203844586
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,7 +591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1005732409412256142, guid: 81fc7fcdaa5a6664f9cb0bf49eab6c75, type: 3}
-  notification: 3
+  notification: 0
   strategy: 0
   preload: 0
   capacity: 0
@@ -1270,6 +1250,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 830130063}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &714286867 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7462627376900168451, guid: 9c4d274d70afa4e489804a58299ba74b,
+    type: 3}
+  m_PrefabInstance: {fileID: 763484258}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &761186848
 GameObject:
   m_ObjectHideFlags: 0
@@ -1655,6 +1641,10 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1612116129}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7462627376900168451, guid: 9c4d274d70afa4e489804a58299ba74b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 763484263}
     - targetCorrespondingSourceObject: {fileID: 3009261472074076808, guid: 9c4d274d70afa4e489804a58299ba74b,
         type: 3}
       insertIndex: -1
@@ -1686,6 +1676,26 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 763484258}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &763484263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714286867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4894aec049d2bc478e6200ef1af1430, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targets:
+  - {fileID: 218779657523934640}
+  - {fileID: 1115574580}
+  - {fileID: 111048399}
+  - {fileID: 90086392}
+  points: []
+  objectPool: {fileID: 220042361}
+  cam: {fileID: 961739752}
 --- !u!1 &766755914 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 65670129725285656, guid: e6d32a348386aea42acd8832f1959c45,
@@ -7686,6 +7696,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4199113790944682444, guid: b67b2298c5be9e54d9def4ef4225a996,
+        type: 3}
+      propertyPath: sceneManager
+      value: 
+      objectReference: {fileID: 182861456}
     - target: {fileID: 4219137347263472077, guid: b67b2298c5be9e54d9def4ef4225a996,
         type: 3}
       propertyPath: m_Name
@@ -7870,6 +7885,11 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6821451413798021089, guid: 1f51eae0a1d427f4381e18a0dbb04e79,
+        type: 3}
+      propertyPath: sceneManager
+      value: 
+      objectReference: {fileID: 182861456}
     - target: {fileID: 7514901502897353810, guid: 1f51eae0a1d427f4381e18a0dbb04e79,
         type: 3}
       propertyPath: m_IsTrigger
@@ -9879,6 +9899,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1795165906303413845, guid: c7d99411fea82994b85119d27df4f01f,
+        type: 3}
+      propertyPath: sceneManager
+      value: 
+      objectReference: {fileID: 182861456}
     - target: {fileID: 5177490584415540755, guid: c7d99411fea82994b85119d27df4f01f,
         type: 3}
       propertyPath: m_ApplyRootMotion
@@ -14132,6 +14157,11 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3916702341946212137, guid: 9ce64e388a703724d8d53a862549e9df,
+        type: 3}
+      propertyPath: sceneManager
+      value: 
+      objectReference: {fileID: 182861456}
     - target: {fileID: 3984385649915190916, guid: 9ce64e388a703724d8d53a862549e9df,
         type: 3}
       propertyPath: m_LocalPosition.x

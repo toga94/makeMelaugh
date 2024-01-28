@@ -80,7 +80,7 @@ public class DragUIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
                 CreateObject(worldPoint);
             }else if (hit.transform.gameObject.GetComponent<NavMeshAgent>() && itemType == ItemType.UsableTool)
             {
-                PlayTool(hit.transform, 3, tool);
+                PlayTool(hit.transform, .85f, tool);
             }
             Destroy(UIDragElement.gameObject);
         }
