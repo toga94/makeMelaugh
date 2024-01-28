@@ -92,11 +92,11 @@ public class UnitController : MonoBehaviour
         _stateMachine.AddState(walkState, trapState, () => isTrapped);
         _stateMachine.AddState(walkState, idleState, () => Target != null &&  _canPlayAnimation);
 
-        _stateMachine.AddState(sitState, walkState, () => !_canPlayAnimation && Target != null && !Target.Transform.name.Contains("sit"));
+        _stateMachine.AddState(sitState, walkState, () => !_canPlayAnimation && Target != null);
 
-        _stateMachine.AddState(washState, walkState, () => !_canPlayAnimation && Target != null && !Target.Transform.name.Contains("wash"));
+        _stateMachine.AddState(washState, walkState, () => !_canPlayAnimation && Target != null );
 
-        _stateMachine.AddState(cookState, walkState, () => !_canPlayAnimation && Target != null && !Target.Transform.name.Contains("cook"));
+        _stateMachine.AddState(cookState, walkState, () => !_canPlayAnimation && Target != null);
 
         _stateMachine.AddState(trapState, walkState, () => !isTrapped);
         _stateMachine.AddState(trapState, idleState, () => !isTrapped);
@@ -110,7 +110,7 @@ public class UnitController : MonoBehaviour
         {
             isTrapped = true;
         }
-        await Task.Delay(1000);
+        await Task.Delay(1300);
         isTrapped = false;
         Destroy(other.gameObject);
     }

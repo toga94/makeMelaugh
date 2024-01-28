@@ -650,7 +650,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BasicMotions@Run01 - Backwards
+  m_Name: Slip
   m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
