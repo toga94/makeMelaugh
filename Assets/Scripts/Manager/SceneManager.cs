@@ -14,11 +14,13 @@ public class SceneManager : MonoBehaviour
     [SerializeField] private Slider crySlider;
     [SerializeField] private float timer = 100;
     [SerializeField] private GameObject SmokeFX;
+
     void Start()
     {
         Init();
         camera = Camera.main;
     }
+
 
     private void Init()
     {
