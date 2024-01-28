@@ -73,11 +73,13 @@ public class SceneManager : MonoBehaviour
             }
         }
 
+    [SerializeField] private GameObject WinUI;
+    [SerializeField] private GameObject LoseUI;
 
     void GameWon() {
-
+        WinUI.SetActive(true);
     }
     void GameLose(){
-    
+    LoseUI.SetActive(true);
     }
 }
