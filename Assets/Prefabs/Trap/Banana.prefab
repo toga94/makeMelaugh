@@ -43,8 +43,7 @@ GameObject:
   - component: {fileID: 2241117642720770417}
   - component: {fileID: 5020719014364576641}
   - component: {fileID: 3689242671370522762}
-  - component: {fileID: 3269329143339297067}
-  - component: {fileID: 2729014331849425495}
+  - component: {fileID: 6300636077671484299}
   m_Layer: 0
   m_Name: Banana Peel
   m_TagString: Trap
@@ -119,8 +118,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3269329143339297067
-MeshCollider:
+--- !u!135 &6300636077671484299
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -137,34 +136,6 @@ MeshCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 3890010298973275403, guid: a5d3315a5e2e55549b6dad78cd19e0ad, type: 3}
---- !u!54 &2729014331849425495
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7007794381490984816}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  serializedVersion: 3
+  m_Radius: 11.08
+  m_Center: {x: -0.78, y: -0.94, z: 0}

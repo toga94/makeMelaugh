@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c7c0aed7cad5f545967565206cf5e4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PrefabToInstantiate: {fileID: 6438882092531695050, guid: a4fbb2ffda61fa141b982c6a3cfa74c6,
+  PrefabToInstantiate: {fileID: 1280567009864046816, guid: a4fbb2ffda61fa141b982c6a3cfa74c6,
     type: 3}
   UIDragElement: {fileID: 8416055414116551819}
   Canvas: {fileID: 0}
