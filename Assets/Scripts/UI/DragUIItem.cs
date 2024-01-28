@@ -85,6 +85,9 @@ public class DragUIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
                 CreateObject(worldPoint);
             }else if (hit.transform.gameObject.GetComponent<NavMeshAgent>() && itemType == ItemType.UsableTool)
             {
+                if(item.tool == Tool.Slap) audioSource = GameObject.Find("Slap").GetComponent<AudioSource>();
+                if(item.tool == Tool.Signal) audioSource = GameObject.Find("Signal").GetComponent<AudioSource>();
+
                 PlayTool(hit.transform, .85f, tool);
             }
             Destroy(UIDragElement.gameObject);
