@@ -48,6 +48,7 @@ public class DragUIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     public void OnBeginDrag(PointerEventData data)
     {
         mOriginalPanelLocalPosition = UIDragElement.localPosition;
+        if (Canvas == null) Canvas = GameObject.Find("Canvas").GetComponent<RectTransform>();
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             Canvas, 
             data.position, 
