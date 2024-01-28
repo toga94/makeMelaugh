@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class TrapState : IState
 {
-    UnitController _unitController;
+    UnitController unitController;
     float curSpeed;
 
     public TrapState(UnitController unitController)
     {
-        _unitController = unitController;
+        this.unitController = unitController;
     }
     public void Tick()
     {
-        curSpeed = Mathf.Min(_unitController.navMeshAgent.velocity.magnitude, 1);
+        curSpeed = Mathf.Min(unitController.navMeshAgent.velocity.magnitude, 1);
 
     }
     public void FixedTick()
@@ -27,14 +27,16 @@ public class TrapState : IState
     public void OnEnter()
     {
         int animIndex = Random.Range(0, 4);
-        _unitController.animator.SetFloat("Speed", curSpeed);
-        _unitController.animator.SetTrigger("Trapped");
-        _unitController.animator.SetFloat("random_float", animIndex);
+        unitController.animator.SetFloat("Speed", curSpeed);
+        unitController.animator.SetTrigger("Trapped");
+        unitController.animator.SetFloat("random_float", animIndex);
+        unitController.sceneManager.InstantiateSmoke(unitController.transform.position + Vector3.up);
+        unitController.sceneManager.Laugh(4);
     }
 
     public void OnExit()
     {
-        _unitController.animator.SetFloat("Speed", curSpeed);
+        unitController.animator.SetFloat("Speed", curSpeed);
     }
 
 

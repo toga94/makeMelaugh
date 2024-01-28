@@ -8,8 +8,8 @@ public class UnitController : MonoBehaviour
 {
     [SerializeField] private Unit unit;
     [SerializeField] private float walkRadius = 1f;
-    [SerializeField] public Animator animator;
-
+    public Animator animator;
+    public SceneManager sceneManager;
     public NavMeshAgent navMeshAgent { get; private set; }
     public PatrolPath Target { get; private set; }
     private float stayDuration = 0f;
@@ -112,7 +112,15 @@ public class UnitController : MonoBehaviour
         }
         await Task.Delay(1300);
         isTrapped = false;
-        Destroy(other.gameObject);
+        try
+        {
+            Destroy(other.gameObject);
+        }
+        catch (System.Exception)
+        {
+
+        }
+
     }
 
     public void SetNextPatrolPoint()

@@ -91,7 +91,10 @@ public class DragUIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
         Debug.Log(name);
         GameObject go = (GameObject) Instantiate(PrefabToInstantiate, target.position + offset, Quaternion.identity, target);
         Destroy(go, deadline);
-        target.GetComponent<UnitController>().animator.Play(name);
+        UnitController controller = target.GetComponent<UnitController>();
+        controller.animator.Play(name);
+        controller.sceneManager.Laugh(3);
+
     }
 
 

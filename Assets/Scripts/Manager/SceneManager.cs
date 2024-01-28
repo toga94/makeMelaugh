@@ -13,6 +13,7 @@ public class SceneManager : MonoBehaviour
     private Camera camera;
     [SerializeField] private Slider crySlider;
     [SerializeField] private float timer = 100;
+    [SerializeField] private GameObject SmokeFX;
     void Start()
     {
         Init();
@@ -27,8 +28,13 @@ public class SceneManager : MonoBehaviour
     {
         cryBar.MakeMoreCry(timer / 15);
     }
-    public void Laugh() {
-        cryBar.MakeMoreLaugh(timer / 15);
+    public void InstantiateSmoke(Vector3 pos) {
+       GameObject go = Instantiate(SmokeFX, pos, Quaternion.identity);
+        Destroy(go, 7);
+    }
+
+    public void Laugh(float multiply = 1) {
+        cryBar.MakeMoreLaugh((timer / 15) * multiply);
     }
     void Update()
     {
