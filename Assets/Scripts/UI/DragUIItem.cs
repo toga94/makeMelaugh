@@ -51,7 +51,6 @@ public class DragUIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     {
         mOriginalPanelLocalPosition = UIDragElement.localPosition;
         if (Canvas == null) Canvas = GameObject.Find("Canvas").GetComponent<RectTransform>();
-        //if (audioSource == null) audioSource = GameObject.Find("SlipAndFall").GetComponent<AudioSource>();
 
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             Canvas, 
